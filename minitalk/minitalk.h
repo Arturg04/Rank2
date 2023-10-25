@@ -6,7 +6,7 @@
 /*   By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:50:28 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/10/25 20:40:29 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/10/25 23:43:41 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <signal.h>
+# include <sys/types.h>
 # include "libft/libft.h"
 
 #endif

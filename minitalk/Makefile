@@ -6,7 +6,7 @@
 #    By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/18 08:42:34 by ade-pinh          #+#    #+#              #
-#    Updated: 2023/10/25 21:41:23 by ade-pinh         ###   ########.fr        #
+#    Updated: 2023/10/25 23:59:32 by ade-pinh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,10 @@ DoubleUnderline			=\033[21m
 Framed					=\033[51m
 Encircled				=\033[52m
 Overlined				=\033[53m
-
+Del 					=\033[1A\033[K
+Clear					=\033[2K
+Hide_cursor 			=\033[?25l
+Show_cursor 			=\033[?25h
 ### ------------------------------ ###
 
 ### ---------- LINUX ---------- ###
@@ -112,16 +115,21 @@ OBJ2_WIN_64 = $(patsubst $(DIR_SRC2)/%.c, $(DIR_OBJ2)/win64_%.o, $(SRC2))
 all: $(LIBS) $(NAME)
 
 $(LIBS):
-	make -C  $(dir $@)
+	@echo "$(Bright_Green)$(Blink)Compiling $@...$(Reset)"
+	@make bonus -C $(dir $@) > /dev/null 2>&1
+	@echo "$(Bright_Green)$@ compiled successfully.$(Reset)"
+
 
 ##				LIN
 LIN_LIB:$(OBJ1_LIN) $(OBJ2_LIN)
 	$(AR) $@ $^
 
-s_minitalk: $(OBJ1_LIN)
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) -L$(LIBS_DIR) $(LIBS) $^ -o $@
-c_minitalk: $(OBJ2_LIN)
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) -L$(LIBS_DIR) $(LIBS) $^ -o $@
+s_minitalk:
+	$(CC_LIN) $(SRC1) $(CFLAGS) $(INCLUDE) $(LIBS) -o $@
+	@echo "$(Bright_Green)$@ compiled successfully.$(Reset)"
+c_minitalk:
+	$(CC_LIN) $(SRC2) $(CFLAGS) $(INCLUDE) $(LIBS) -o $@
+	@echo "$(Bright_Green)$@ compiled successfully.$(Reset)"
 
 ##
 
@@ -164,12 +172,19 @@ $(DIR_OBJ2)/win64_%.o: $(DIR_SRC2)/%.c
 ##
 
 clean:
-	make fclean -C libft
-	rm -f *.o
+	@echo "$(Bright_Red)Removing Libft...$(Reset)"
+	@make fclean -C libft > /dev/null 2>&1
+	@echo "$(Bright_Red)Libft removed!$(Reset)"
+	@echo "$(Blink)$(Bright_Red)Removing object files...$(Reset)"
+	@rm -f *.o
+	@echo "$(Bright_Red)Object files removed$@$(Reset)"
+
 
 fclean:	clean
-	rm -f $(NAME)
-
+	@echo "$(Blink)$(Bright_Red)Removing minitalk...$(Reset)"
+	@rm -f $(NAME)
+	@echo "$(Bright_Red)minitalk removed!$(Reset)"
+	@echo "$(Bright_Green)All removed successfully$(Reset)"
 
 teste:
 	@echo "$(Black)Black$(Reset)"
