@@ -6,7 +6,7 @@
 #    By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/18 08:42:34 by ade-pinh          #+#    #+#              #
-#    Updated: 2023/10/18 11:10:38 by ade-pinh         ###   ########.fr        #
+#    Updated: 2023/10/25 20:46:32 by ade-pinh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,42 +73,33 @@ CC_WIN_64		= x86_64-w64-mingw32-gcc
 
 ### ---------- OTHERS ---------- ###
 NAME			= push_swap
-CFLAGS			= -Werror -Wextra -Wall
+CFLAGS			= -Werror -Wextra -Wall -g
 INCLUDE			=
-LIB				=
+LIBS			= libft/libft.a
 ### ------------------------------ ###
-
 
 ### ---------- DIRECTORIES ---------- ###
 DIR_INCLUDE		=
-DIR_LIB			=
-DIR_OBJ1		=
-DIR_OBJ2		=
-DIR_OBJ3		=
+DIR_OBJ1		= OBJ
+DIR_OBJ2		= OBJ
 DIR_SRC1		=
 DIR_SRC2		=
-DIR_SRC3		=
 ### ------------------------------ ###
 
 ### ---------- FILES ---------- ###
 
-SRC1			= /
+SRC1			= server.c
 
-SRC2			= /
-
-SRC3			= /
+SRC2			= client.c
 
 OBJ1_LIN = $(patsubst $(DIR_SRC1)/%.c, $(DIR_OBJ1)/%.o, $(SRC1))
 OBJ2_LIN = $(patsubst $(DIR_SRC2)/%.c, $(DIR_OBJ2)/%.o, $(SRC2))
-OBJ3_LIN = $(patsubst $(DIR_SRC3)/%.c, $(DIR_OBJ3)/%.o, $(SRC3))
 
 OBJ1_WIN_32 = $(patsubst $(DIR_SRC1)/%.c, $(DIR_OBJ1)/win32_%.o, $(SRC1))
 OBJ2_WIN_32 = $(patsubst $(DIR_SRC2)/%.c, $(DIR_OBJ2)/win32_%.o, $(SRC2))
-OBJ3_WIN_32 = $(patsubst $(DIR_SRC3)/%.c, $(DIR_OBJ3)/win32_%.o, $(SRC3))
 
 OBJ1_WIN_64 = $(patsubst $(DIR_SRC1)/%.c, $(DIR_OBJ1)/win64_%.o, $(SRC1))
 OBJ2_WIN_64 = $(patsubst $(DIR_SRC2)/%.c, $(DIR_OBJ2)/win64_%.o, $(SRC2))
-OBJ3_WIN_64 = $(patsubst $(DIR_SRC3)/%.c, $(DIR_OBJ3)/win64_%.o, $(SRC3))
 
 ### ---------- FUNCTIONS ---------- ###
 LIN_LIB			= $(NAME)
@@ -123,40 +114,56 @@ all: LIN_COMP
 DIR:
 	mkdir -p $(DIR_OBJ1)
 	mkdir -p $(DIR_OB21)
-	mkdir -p $(DIR_OBJ3)
 
-LIN_LIB:$(OBJ1_LIN) $(OBJ2_LIN) $(OBJ3_LIN)
+$(LIBS):
+	make -C $(dir $@)
+	make clean -C $(dir $@)
+	@mv $@ .
+
+##				LIN
+LIN_LIB:$(OBJ1_LIN) $(OBJ2_LIN)
 	$(AR) $@ $^
-LIN_COMP: $(OBJ1_LIN) $(OBJ2_LIN) $(OBJ3_LIN)
+LIN_COMP: $(OBJ1_LIN) $(OBJ2_LIN)
 	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIB) $^ -o $@
+##
+
+##				Win_64
+WIN_32_LIB:$(OBJ1_WIN_32) $(OBJ2_WIN_32)
+	$(AR) $@ $^
+WIN_32_COMP: $(OBJ1_WIN_32) $(OBJ2_WIN_32)
+	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIB) $^ -o $@
+##
+
+##				Win_32
+WIN_64_LIB:$(OBJ1_WIN_64) $(OBJ2_WIN_64)
+	$(AR) $@ $^
+WIN_64_COMP: $(OBJ1_WIN_64) $(OBJ2_WIN_64)
+	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIB) $^ -o $@
+##
+
+
+# Object Compilation
+
+##				LIN
 $(DIR_OBJ1)/%.o: $(DIR_SRC1)/%.c
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIB) -c $< -o $@
 $(DIR_OBJ2)/%.o: $(DIR_SRC2)/%.c
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) -c $< -o $@
-$(DIR_OBJ3)/%.o: $(DIR_SRC3)/%.c
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIB) -c $< -o $@
+##
 
-WIN_32_LIB:$(OBJ1_WIN_32) $(OBJ2_WIN_32) $(OBJ3_WIN_32)
-	$(AR) $@ $^
-WIN_32_COMP: $(OBJ1_WIN_32) $(OBJ2_WIN_32) $(OBJ3_WIN_32)
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIB) $^ -o $@
+##				Win_32
 $(DIR_OBJ1)/win32_%.o: $(DIR_SRC1)/%.c
 	$(CC_WIN_32) $(CFLAGS) $(INCLUDE) -c $< -o $@
 $(DIR_OBJ2)/win32_%.o: $(DIR_SRC2)/%.c
 	$(CC_WIN_32) $(CFLAGS) $(INCLUDE) -c $< -o $@
-$(DIR_OBJ3)/win32_%.o: $(DIR_SRC3)/%.c
-	$(CC_WIN_32) $(CFLAGS) $(INCLUDE) -c $< -o $@
+##
 
-WIN_64_LIB:$(OBJ1_WIN_64) $(OBJ2_WIN_64) $(OBJ3_WIN_64)
-	$(AR) $@ $^
-WIN_64_COMP: $(OBJ1_WIN_64) $(OBJ2_WIN_64) $(OBJ3_WIN_64)
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIB) $^ -o $@
+##				Win_64
 $(DIR_OBJ1)/win64_%.o: $(DIR_SRC1)/%.c
 	$(CC_WIN_64) $(CFLAGS) $(INCLUDE) -c $< -o $@
 $(DIR_OBJ2)/win64_%.o: $(DIR_SRC2)/%.c
 	$(CC_WIN_64) $(CFLAGS) $(INCLUDE) -c $< -o $@
-$(DIR_OBJ3)/win64_%.o: $(DIR_SRC3)/%.c
-	$(CC_WIN_64) $(CFLAGS) $(INCLUDE) -c $< -o $@
+##
 
 clean:
 	rm -f $(OBJ1_LIN) $(OBJ2_LIN) $(OBJ3_LIN) \
@@ -165,6 +172,7 @@ clean:
 
 fclean:	clean
 	rm -f LIN_COMP WIN_32_COMP WIN_64_COMP LIN_LIB WIN_32_LIB WIN_64_LIB
+
 
 teste:
 	@echo "$(Black)Black$(Reset)"
