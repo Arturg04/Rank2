@@ -6,7 +6,7 @@
 #    By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/18 08:42:34 by ade-pinh          #+#    #+#              #
-#    Updated: 2023/10/25 20:46:32 by ade-pinh         ###   ########.fr        #
+#    Updated: 2023/10/25 21:08:50 by ade-pinh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,12 +74,13 @@ CC_WIN_64		= x86_64-w64-mingw32-gcc
 ### ---------- OTHERS ---------- ###
 NAME			= push_swap
 CFLAGS			= -Werror -Wextra -Wall -g
-INCLUDE			=
-LIBS			= libft/libft.a
+INCLUDE			= -I $(DIR_INCLUDE)
+LIBS			= libft.a
+LIBS_DIR		= libft/
 ### ------------------------------ ###
 
 ### ---------- DIRECTORIES ---------- ###
-DIR_INCLUDE		=
+DIR_INCLUDE		= include
 DIR_OBJ1		= OBJ
 DIR_OBJ2		= OBJ
 DIR_SRC1		=
@@ -89,7 +90,6 @@ DIR_SRC2		=
 ### ---------- FILES ---------- ###
 
 SRC1			= server.c
-
 SRC2			= client.c
 
 OBJ1_LIN = $(patsubst $(DIR_SRC1)/%.c, $(DIR_OBJ1)/%.o, $(SRC1))
@@ -102,43 +102,53 @@ OBJ1_WIN_64 = $(patsubst $(DIR_SRC1)/%.c, $(DIR_OBJ1)/win64_%.o, $(SRC1))
 OBJ2_WIN_64 = $(patsubst $(DIR_SRC2)/%.c, $(DIR_OBJ2)/win64_%.o, $(SRC2))
 
 ### ---------- FUNCTIONS ---------- ###
-LIN_LIB			= $(NAME)
-LIN_COMP		= $(NAME)
-WIN_32_LIB		= $(NAME)
-WIN_32_COMP		= $(NAME)
-WIN_64_LIB		= $(NAME)
-WIN_64_COMP		= $(NAME)
+# LIN_LIB			= $(NAME)
+# LIN_COMP			= $(NAME)
+# WIN_32_LIB		= $(NAME)
+# WIN_32_COMP		= $(NAME)
+# WIN_64_LIB		= $(NAME)
+# WIN_64_COMP		= $(NAME)
 
-all: LIN_COMP
+NAME = s_minitalk
+
+all: s_minitalk c_minitalk
 
 DIR:
 	mkdir -p $(DIR_OBJ1)
 	mkdir -p $(DIR_OB21)
 
-$(LIBS):
+$(LIBS): $(LIBS_DIR)
+
+$(LIBS_DIR):
+	mkdir $(DIR_INCLUDE)
 	make -C $(dir $@)
 	make clean -C $(dir $@)
+	cp $(dir $@)/*.h $(DIR_INCLUDE)
 	@mv $@ .
 
 ##				LIN
 LIN_LIB:$(OBJ1_LIN) $(OBJ2_LIN)
 	$(AR) $@ $^
-LIN_COMP: $(OBJ1_LIN) $(OBJ2_LIN)
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIB) $^ -o $@
+
+s_minitalk: $(OBJ1_LIN)
+	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIBS) $^ -o $@
+c_minitalk: $(OBJ2_LIN)
+	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIBS) $^ -o $@
+
 ##
 
 ##				Win_64
 WIN_32_LIB:$(OBJ1_WIN_32) $(OBJ2_WIN_32)
 	$(AR) $@ $^
 WIN_32_COMP: $(OBJ1_WIN_32) $(OBJ2_WIN_32)
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIB) $^ -o $@
+	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIBS) $^ -o $@
 ##
 
 ##				Win_32
 WIN_64_LIB:$(OBJ1_WIN_64) $(OBJ2_WIN_64)
 	$(AR) $@ $^
 WIN_64_COMP: $(OBJ1_WIN_64) $(OBJ2_WIN_64)
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIB) $^ -o $@
+	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIBS) $^ -o $@
 ##
 
 
@@ -146,9 +156,9 @@ WIN_64_COMP: $(OBJ1_WIN_64) $(OBJ2_WIN_64)
 
 ##				LIN
 $(DIR_OBJ1)/%.o: $(DIR_SRC1)/%.c
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIB) -c $< -o $@
+	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIBS) -c $< -o $@
 $(DIR_OBJ2)/%.o: $(DIR_SRC2)/%.c
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIB) -c $< -o $@
+	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIBS) -c $< -o $@
 ##
 
 ##				Win_32
@@ -171,7 +181,7 @@ clean:
 		$(OBJ1_WIN_64) $(OBJ2_WIN_64) $(OBJ3_WIN_64)
 
 fclean:	clean
-	rm -f LIN_COMP WIN_32_COMP WIN_64_COMP LIN_LIB WIN_32_LIB WIN_64_LIB
+	rm -f LIN_COMP WIN_32_COMP WIN_64_COMP LIN_LIB WIN_32_LIB WIN_64_LIB *.a
 
 
 teste:
