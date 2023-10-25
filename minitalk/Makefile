@@ -6,7 +6,7 @@
 #    By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/18 08:42:34 by ade-pinh          #+#    #+#              #
-#    Updated: 2023/10/25 21:08:50 by ade-pinh         ###   ########.fr        #
+#    Updated: 2023/10/25 21:41:23 by ade-pinh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,11 +72,11 @@ CC_WIN_64		= x86_64-w64-mingw32-gcc
 ### ------------------------------ ###
 
 ### ---------- OTHERS ---------- ###
-NAME			= push_swap
+NAME			= s_minitalk c_minitalk
 CFLAGS			= -Werror -Wextra -Wall -g
-INCLUDE			= -I $(DIR_INCLUDE)
-LIBS			= libft.a
-LIBS_DIR		= libft/
+INCLUDE			=
+LIBS			= libft/libft.a
+LIBS_DIR		= libft
 ### ------------------------------ ###
 
 ### ---------- DIRECTORIES ---------- ###
@@ -109,31 +109,19 @@ OBJ2_WIN_64 = $(patsubst $(DIR_SRC2)/%.c, $(DIR_OBJ2)/win64_%.o, $(SRC2))
 # WIN_64_LIB		= $(NAME)
 # WIN_64_COMP		= $(NAME)
 
-NAME = s_minitalk
+all: $(LIBS) $(NAME)
 
-all: s_minitalk c_minitalk
-
-DIR:
-	mkdir -p $(DIR_OBJ1)
-	mkdir -p $(DIR_OB21)
-
-$(LIBS): $(LIBS_DIR)
-
-$(LIBS_DIR):
-	mkdir $(DIR_INCLUDE)
-	make -C $(dir $@)
-	make clean -C $(dir $@)
-	cp $(dir $@)/*.h $(DIR_INCLUDE)
-	@mv $@ .
+$(LIBS):
+	make -C  $(dir $@)
 
 ##				LIN
 LIN_LIB:$(OBJ1_LIN) $(OBJ2_LIN)
 	$(AR) $@ $^
 
 s_minitalk: $(OBJ1_LIN)
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIBS) $^ -o $@
+	$(CC_LIN) $(CFLAGS) $(INCLUDE) -L$(LIBS_DIR) $(LIBS) $^ -o $@
 c_minitalk: $(OBJ2_LIN)
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIBS) $^ -o $@
+	$(CC_LIN) $(CFLAGS) $(INCLUDE) -L$(LIBS_DIR) $(LIBS) $^ -o $@
 
 ##
 
@@ -176,12 +164,11 @@ $(DIR_OBJ2)/win64_%.o: $(DIR_SRC2)/%.c
 ##
 
 clean:
-	rm -f $(OBJ1_LIN) $(OBJ2_LIN) $(OBJ3_LIN) \
-		$(OBJ1_WIN_32) $(OBJ2_WIN_32) $(OBJ3_WIN_32) \
-		$(OBJ1_WIN_64) $(OBJ2_WIN_64) $(OBJ3_WIN_64)
+	make fclean -C libft
+	rm -f *.o
 
 fclean:	clean
-	rm -f LIN_COMP WIN_32_COMP WIN_64_COMP LIN_LIB WIN_32_LIB WIN_64_LIB *.a
+	rm -f $(NAME)
 
 
 teste:
