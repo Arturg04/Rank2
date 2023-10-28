@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+         #
+#    By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/18 08:42:34 by ade-pinh          #+#    #+#              #
-#    Updated: 2023/10/25 23:59:32 by ade-pinh         ###   ########.fr        #
+#    Updated: 2023/10/28 01:20:27 by ade-pinh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,87 +66,54 @@ CC_LIN			= cc
 AR				= ar rsc
 ### ------------------------------ ###
 
-### ---------- WIN_32 ---------- ###
-CC_WIN_32		= i686-w64-mingw32-gcc
-### ------------------------------ ###
-
-### ---------- WIN_64 ---------- ###
-CC_WIN_64		= x86_64-w64-mingw32-gcc
-### ------------------------------ ###
-
 ### ---------- OTHERS ---------- ###
-NAME			= s_minitalk c_minitalk
+NAME			= server client
+NAME_BONUS		= server_bonus client_bonus
 CFLAGS			= -Werror -Wextra -Wall -g
 INCLUDE			=
 LIBS			= libft/libft.a
 LIBS_DIR		= libft
 ### ------------------------------ ###
 
-### ---------- DIRECTORIES ---------- ###
-DIR_INCLUDE		= include
-DIR_OBJ1		= OBJ
-DIR_OBJ2		= OBJ
-DIR_SRC1		=
-DIR_SRC2		=
-### ------------------------------ ###
-
 ### ---------- FILES ---------- ###
 
 SRC1			= server.c
 SRC2			= client.c
+SRC1_BONUS		= server_bonus.c
+SRC2_BONUS		= client_bonus.c
 
-OBJ1_LIN = $(patsubst $(DIR_SRC1)/%.c, $(DIR_OBJ1)/%.o, $(SRC1))
-OBJ2_LIN = $(patsubst $(DIR_SRC2)/%.c, $(DIR_OBJ2)/%.o, $(SRC2))
-
-OBJ1_WIN_32 = $(patsubst $(DIR_SRC1)/%.c, $(DIR_OBJ1)/win32_%.o, $(SRC1))
-OBJ2_WIN_32 = $(patsubst $(DIR_SRC2)/%.c, $(DIR_OBJ2)/win32_%.o, $(SRC2))
-
-OBJ1_WIN_64 = $(patsubst $(DIR_SRC1)/%.c, $(DIR_OBJ1)/win64_%.o, $(SRC1))
-OBJ2_WIN_64 = $(patsubst $(DIR_SRC2)/%.c, $(DIR_OBJ2)/win64_%.o, $(SRC2))
+#OBJ1_LIN = $(patsubst $(DIR_SRC1)/%.c, $(DIR_OBJ1)/%.o, $(SRC1))
+#OBJ2_LIN = $(patsubst $(DIR_SRC2)/%.c, $(DIR_OBJ2)/%.o, $(SRC2))
 
 ### ---------- FUNCTIONS ---------- ###
-# LIN_LIB			= $(NAME)
-# LIN_COMP			= $(NAME)
-# WIN_32_LIB		= $(NAME)
-# WIN_32_COMP		= $(NAME)
-# WIN_64_LIB		= $(NAME)
-# WIN_64_COMP		= $(NAME)
 
 all: $(LIBS) $(NAME)
 
 $(LIBS):
 	@echo "$(Bright_Green)$(Blink)Compiling $@...$(Reset)"
 	@make bonus -C $(dir $@) > /dev/null 2>&1
-	@echo "$(Bright_Green)$@ compiled successfully.$(Reset)"
-
+	@echo "$(Del)"
+	@echo "$(Del)$(Bright_Green)$@ compiled successfully.$(Reset)"
 
 ##				LIN
 LIN_LIB:$(OBJ1_LIN) $(OBJ2_LIN)
 	$(AR) $@ $^
 
-s_minitalk:
-	$(CC_LIN) $(SRC1) $(CFLAGS) $(INCLUDE) $(LIBS) -o $@
+$(NAME):
+	@$(CC_LIN) $(SRC1) $(CFLAGS) $(INCLUDE) $(LIBS) -o server
 	@echo "$(Bright_Green)$@ compiled successfully.$(Reset)"
-c_minitalk:
-	$(CC_LIN) $(SRC2) $(CFLAGS) $(INCLUDE) $(LIBS) -o $@
+	@$(CC_LIN) $(SRC2) $(CFLAGS) $(INCLUDE) $(LIBS) -o client
+	@echo "$(Bright_Green)$@ compiled successfully.$(Reset)"
+
+bonus: $(LIBS) $(NAME_BONUS)
+
+$(NAME_BONUS):
+	@$(CC_LIN) $(SRC1_BONUS) $(CFLAGS) $(INCLUDE) $(LIBS) -o server_bonus
+	@echo "$(Bright_Green)$@ compiled successfully.$(Reset)"
+	@$(CC_LIN) $(SRC2_BONUS) $(CFLAGS) $(INCLUDE) $(LIBS) -o client_bonus
 	@echo "$(Bright_Green)$@ compiled successfully.$(Reset)"
 
 ##
-
-##				Win_64
-WIN_32_LIB:$(OBJ1_WIN_32) $(OBJ2_WIN_32)
-	$(AR) $@ $^
-WIN_32_COMP: $(OBJ1_WIN_32) $(OBJ2_WIN_32)
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIBS) $^ -o $@
-##
-
-##				Win_32
-WIN_64_LIB:$(OBJ1_WIN_64) $(OBJ2_WIN_64)
-	$(AR) $@ $^
-WIN_64_COMP: $(OBJ1_WIN_64) $(OBJ2_WIN_64)
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIBS) $^ -o $@
-##
-
 
 # Object Compilation
 
@@ -157,34 +124,22 @@ $(DIR_OBJ2)/%.o: $(DIR_SRC2)/%.c
 	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIBS) -c $< -o $@
 ##
 
-##				Win_32
-$(DIR_OBJ1)/win32_%.o: $(DIR_SRC1)/%.c
-	$(CC_WIN_32) $(CFLAGS) $(INCLUDE) -c $< -o $@
-$(DIR_OBJ2)/win32_%.o: $(DIR_SRC2)/%.c
-	$(CC_WIN_32) $(CFLAGS) $(INCLUDE) -c $< -o $@
-##
-
-##				Win_64
-$(DIR_OBJ1)/win64_%.o: $(DIR_SRC1)/%.c
-	$(CC_WIN_64) $(CFLAGS) $(INCLUDE) -c $< -o $@
-$(DIR_OBJ2)/win64_%.o: $(DIR_SRC2)/%.c
-	$(CC_WIN_64) $(CFLAGS) $(INCLUDE) -c $< -o $@
-##
+re: fclean all
 
 clean:
-	@echo "$(Bright_Red)Removing Libft...$(Reset)"
 	@make fclean -C libft > /dev/null 2>&1
 	@echo "$(Bright_Red)Libft removed!$(Reset)"
-	@echo "$(Blink)$(Bright_Red)Removing object files...$(Reset)"
 	@rm -f *.o
-	@echo "$(Bright_Red)Object files removed$@$(Reset)"
+	@echo "$(Bright_Red)Object files removed$(Reset)"
 
 
 fclean:	clean
-	@echo "$(Blink)$(Bright_Red)Removing minitalk...$(Reset)"
 	@rm -f $(NAME)
+	@rm -f $(NAME_BONUS)
 	@echo "$(Bright_Red)minitalk removed!$(Reset)"
 	@echo "$(Bright_Green)All removed successfully$(Reset)"
+
+
 
 teste:
 	@echo "$(Black)Black$(Reset)"

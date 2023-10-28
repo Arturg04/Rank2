@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:56:01 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/10/28 01:14:29 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/10/28 01:13:06 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
-void	build_char(int signal)
+void	build_char(int signal, siginfo_t *info, void *content)
 {
 	static int	i;
 	static char	c;
 
+	(void)content;
 	if (signal != SIGUSR1 && signal != SIGUSR2)
 	{
 		i = 0;
@@ -29,30 +30,35 @@ void	build_char(int signal)
 	if (i == 8)
 	{
 		if (c == 0)
+		{
 			write(1, "\n", 1);
+			kill(info->si_pid, SIGUSR1);
+		}
 		write(1, &c, 1);
 		i = 0;
 		c = 0;
 	}
 }
 
-void	signal_handler(int bit)
+void	signal_handler(int bit, siginfo_t *info, void *content)
 {
-	build_char(bit);
-	signal(bit, signal_handler);
+	build_char(bit, info, content);
 }
 
 int	main(void)
 {
+	struct sigaction	action;
 	int					pid;
 
 	pid = getpid();
-	build_char(0);
+	build_char(0, NULL, NULL);
 	write(1, "Server PID: ", ft_strlen("Server PID: "));
 	ft_putnbr_fd(pid, 1);
 	write(1, "\n", 1);
-	signal(SIGUSR1, signal_handler);
-	signal(SIGUSR2, signal_handler);
+	action.sa_sigaction = &signal_handler;
+	action.sa_flags = SA_SIGINFO;
+	sigaction(SIGUSR1, &action, NULL);
+	sigaction(SIGUSR2, &action, NULL);
 	while (1)
 	{
 	}

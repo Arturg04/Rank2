@@ -6,7 +6,7 @@
 /*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 20:16:07 by Arturg04          #+#    #+#             */
-/*   Updated: 2023/10/08 17:10:39 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/10/27 19:22:04 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strdup(const char *str)
 {
-	char	*		s;
+	char			*s;
 	unsigned int	i;
 
 	i = 0;

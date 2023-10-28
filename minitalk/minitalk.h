@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+        */
+/*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:50:28 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/10/25 23:43:41 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/10/27 20:35:35 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINITALK_H
 # define MINITALK_H
 
-# include <unistd.h>
+# include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
 # include <signal.h>
-# include <sys/types.h>
 # include "libft/libft.h"
 
 #endif
