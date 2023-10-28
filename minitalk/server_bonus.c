@@ -6,7 +6,7 @@
 /*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:56:01 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/10/28 01:13:06 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/10/28 15:37:31 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	build_char(int signal, siginfo_t *info, void *content)
 {
-	static int	i;
-	static char	c;
+	static int		i;
+	static wchar_t	c;
 
 	(void)content;
 	if (signal != SIGUSR1 && signal != SIGUSR2)
@@ -27,7 +27,7 @@ void	build_char(int signal, siginfo_t *info, void *content)
 	if (signal == SIGUSR1)
 		c |= (1 << i);
 	i++;
-	if (i == 8)
+	if (i == 32)
 	{
 		if (c == 0)
 		{

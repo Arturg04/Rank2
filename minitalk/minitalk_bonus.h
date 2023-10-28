@@ -6,7 +6,7 @@
 /*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:50:28 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/10/27 23:52:22 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/10/28 15:37:30 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <signal.h>
+# include <signal.h>
+# include <wchar.h>
 # include "libft/libft.h"
 
 #endif

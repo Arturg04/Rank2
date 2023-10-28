@@ -6,7 +6,7 @@
 #    By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/18 08:42:34 by ade-pinh          #+#    #+#              #
-#    Updated: 2023/10/28 01:20:27 by ade-pinh         ###   ########.fr        #
+#    Updated: 2023/10/28 15:37:24 by ade-pinh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,8 +96,8 @@ $(LIBS):
 	@echo "$(Del)$(Bright_Green)$@ compiled successfully.$(Reset)"
 
 ##				LIN
-LIN_LIB:$(OBJ1_LIN) $(OBJ2_LIN)
-	$(AR) $@ $^
+#LIN_LIB:$(OBJ1_LIN) $(OBJ2_LIN)
+#	$(AR) $@ $^
 
 $(NAME):
 	@$(CC_LIN) $(SRC1) $(CFLAGS) $(INCLUDE) $(LIBS) -o server
@@ -124,8 +124,6 @@ $(DIR_OBJ2)/%.o: $(DIR_SRC2)/%.c
 	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIBS) -c $< -o $@
 ##
 
-re: fclean all
-
 clean:
 	@make fclean -C libft > /dev/null 2>&1
 	@echo "$(Bright_Red)Libft removed!$(Reset)"
@@ -139,7 +137,9 @@ fclean:	clean
 	@echo "$(Bright_Red)minitalk removed!$(Reset)"
 	@echo "$(Bright_Green)All removed successfully$(Reset)"
 
+re: fclean all
 
+bonus_re: fclean bonus
 
 teste:
 	@echo "$(Black)Black$(Reset)"
@@ -177,3 +177,5 @@ teste:
 	@echo "$(Framed)Framed$(Reset)"
 	@echo "$(Encircled)Encircled$(Reset)"
 	@echo "$(Overlined)Overlined$(Reset)"
+
+.phony: all bonus fclean clean re bonus_re

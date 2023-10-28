@@ -6,7 +6,7 @@
 /*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:55:42 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/10/28 01:14:01 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/10/28 15:37:18 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	signal_handler(int sig)
 	exit(1);
 }
 
-void	ft_send(int pid, char c)
+void	ft_send(int pid, wchar_t c)
 {
 	int	i;
 
 	i = -1;
-	while (++i < 8)
+	while (++i < 32)
 	{
 		if (c & (1 << i))
 			kill(pid, SIGUSR1);
@@ -32,7 +32,6 @@ void	ft_send(int pid, char c)
 			kill(pid, SIGUSR2);
 		usleep(150);
 	}
-	usleep(50);
 }
 
 int	main(int ac, char **av)
