@@ -3,69 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+        */
+/*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 20:23:44 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/10/22 22:58:44 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/10/29 20:26:48 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_push_swap *stack, char c)
+void	call_error(t_push_swap *_stack)
 {
-	t_push_swap	*temp;
-
-	temp->value = stack->next->value;
-	stack->next->value = stack->value;
-	stack->value = temp->value;
-	if (c == 'a')
-		write(1, "sa\n", 3);
-	if (c == 'b')
-		write(1, "sb\n", 3);
+	free_stack(_stack);
+	write(1, "Error\n", 6);
+	exit(0);
+}
+void	free_stack(t_push_swap *_stack)
+{
+	if (!_stack)
+		return ;
+	if (_stack->next)
+		free_stack(_stack->next);
+	if (_stack)
+		free(_stack);
 }
 
-void	swap_both(t_push_swap *stack_a, t_push_swap *stack_b)
+void	print_stacks(t_push_swap *_stack_a, t_push_swap *_stack_b)
 {
-	swap(&stack_a, 'c');
-	swap(&stack_b, 'c');
-	write(1, "ss\n", 3);
-}
-
-void	push(t_push_swap *stack_src, t_push_swap *stack_dest, char c)
-{
-	t_push_swap	*temp;
-
-	temp->value = stack_dest->value;
-	stack_dest->value = stack_src->value;
-	stack_src->value = temp->value;
-	if (c == 'a')
-		write(1, "pa\n", 3);
-	if (c == 'b')
-		write(1, "pb\n", 3);
-}
-
-void	rotate(t_push_swap *stack, char c)
-{
-	t_push_swap	*temp;
-
-	temp->value = stack->value;
-	while (stack->next && stack)
+	while (_stack_a || _stack_b)
 	{
-		stack->value = stack->next->value;
-		stack = stack->next;
+		if (_stack_a)
+		{
+			ft_putnbr_fd(_stack_a->value, 1);
+			_stack_a = _stack_a->next;
+		}
+		else
+			write(1, "     ", 5);
+		write(1, "|", 1);
+		if (_stack_b)
+		{
+			ft_putnbr_fd(_stack_b->value, 1);
+			_stack_b = _stack_b->next;
+		}
+		else
+			write(1, "     ", 5);
+		write(1, "\n", 1);
 	}
-	stack->value = temp->value;
-	if (c == 'a')
-		write(1, "ra\n", 3);
-	if (c == 'b')
-		write(1, "rb\n", 3);
-
-}
-
-void	rotate_both(t_push_swap *stack_a, t_push_swap *stack_b)
-{
-	rotate(stack_a, 'c');
-	rotate(stack_b, 'c');
-	write(1, "rr\n", 3);
 }

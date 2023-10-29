@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+         #
+#    By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/18 08:42:34 by ade-pinh          #+#    #+#              #
-#    Updated: 2023/10/18 11:10:38 by ade-pinh         ###   ########.fr        #
+#    Updated: 2023/10/29 01:31:14 by ade-pinh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,10 @@ DoubleUnderline			=\033[21m
 Framed					=\033[51m
 Encircled				=\033[52m
 Overlined				=\033[53m
-
+Del 					=\033[1A\033[K
+Clear					=\033[2K
+Hide_cursor 			=\033[?25l
+Show_cursor 			=\033[?25h
 ### ------------------------------ ###
 
 ### ---------- LINUX ---------- ###
@@ -63,108 +66,76 @@ CC_LIN			= cc
 AR				= ar rsc
 ### ------------------------------ ###
 
-### ---------- WIN_32 ---------- ###
-CC_WIN_32		= i686-w64-mingw32-gcc
-### ------------------------------ ###
-
-### ---------- WIN_64 ---------- ###
-CC_WIN_64		= x86_64-w64-mingw32-gcc
-### ------------------------------ ###
-
 ### ---------- OTHERS ---------- ###
 NAME			= push_swap
-CFLAGS			= -Werror -Wextra -Wall
+NAME_BONUS		= server_bonus client_bonus
+CFLAGS			= -Werror -Wextra -Wall -g -fsanitize=address
 INCLUDE			=
-LIB				=
-### ------------------------------ ###
-
-
-### ---------- DIRECTORIES ---------- ###
-DIR_INCLUDE		=
-DIR_LIB			=
-DIR_OBJ1		=
-DIR_OBJ2		=
-DIR_OBJ3		=
-DIR_SRC1		=
-DIR_SRC2		=
-DIR_SRC3		=
+LIBS			= libft/libft.a
+LIBS_DIR		= libft
 ### ------------------------------ ###
 
 ### ---------- FILES ---------- ###
 
-SRC1			= /
+SRC			= main.c push_swap_check_args.c push_swap_cost_utils.c push_swap_cost.c push_swap_sort.c push_swap_utils.c push_swap_utils2.c push_swap.c
+#SRC_BONUS	= server_bonus.c
 
-SRC2			= /
-
-SRC3			= /
-
-OBJ1_LIN = $(patsubst $(DIR_SRC1)/%.c, $(DIR_OBJ1)/%.o, $(SRC1))
-OBJ2_LIN = $(patsubst $(DIR_SRC2)/%.c, $(DIR_OBJ2)/%.o, $(SRC2))
-OBJ3_LIN = $(patsubst $(DIR_SRC3)/%.c, $(DIR_OBJ3)/%.o, $(SRC3))
-
-OBJ1_WIN_32 = $(patsubst $(DIR_SRC1)/%.c, $(DIR_OBJ1)/win32_%.o, $(SRC1))
-OBJ2_WIN_32 = $(patsubst $(DIR_SRC2)/%.c, $(DIR_OBJ2)/win32_%.o, $(SRC2))
-OBJ3_WIN_32 = $(patsubst $(DIR_SRC3)/%.c, $(DIR_OBJ3)/win32_%.o, $(SRC3))
-
-OBJ1_WIN_64 = $(patsubst $(DIR_SRC1)/%.c, $(DIR_OBJ1)/win64_%.o, $(SRC1))
-OBJ2_WIN_64 = $(patsubst $(DIR_SRC2)/%.c, $(DIR_OBJ2)/win64_%.o, $(SRC2))
-OBJ3_WIN_64 = $(patsubst $(DIR_SRC3)/%.c, $(DIR_OBJ3)/win64_%.o, $(SRC3))
+#OBJ1_LIN = $(patsubst $(DIR_SRC1)/%.c, $(DIR_OBJ1)/%.o, $(SRC1))
+#OBJ2_LIN = $(patsubst $(DIR_SRC2)/%.c, $(DIR_OBJ2)/%.o, $(SRC2))
 
 ### ---------- FUNCTIONS ---------- ###
-LIN_LIB			= $(NAME)
-LIN_COMP		= $(NAME)
-WIN_32_LIB		= $(NAME)
-WIN_32_COMP		= $(NAME)
-WIN_64_LIB		= $(NAME)
-WIN_64_COMP		= $(NAME)
 
-all: LIN_COMP
+all: $(LIBS) $(NAME)
 
-DIR:
-	mkdir -p $(DIR_OBJ1)
-	mkdir -p $(DIR_OB21)
-	mkdir -p $(DIR_OBJ3)
+$(LIBS):
+	@echo "$(Bright_Green)$(Blink)Compiling libft...$(Reset)"
+	@make -C $(dir $@) > /dev/null 2>&1
+	@echo "$(Del)"
+	@echo "$(Del)$(Bright_Green)libft compiled successfully.$(Reset)"
 
-LIN_LIB:$(OBJ1_LIN) $(OBJ2_LIN) $(OBJ3_LIN)
-	$(AR) $@ $^
-LIN_COMP: $(OBJ1_LIN) $(OBJ2_LIN) $(OBJ3_LIN)
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIB) $^ -o $@
+##				LIN
+#LIN_LIB:$(OBJ1_LIN) $(OBJ2_LIN)
+#	$(AR) $@ $^
+
+$(NAME):
+	@$(CC_LIN) $(SRC) $(CFLAGS) $(INCLUDE) $(LIBS) -o $@
+	@echo "$(Bright_Green)$@ compiled successfully.$(Reset)"
+
+bonus: $(LIBS) $(NAME_BONUS)
+
+$(NAME_BONUS):
+	@$(CC_LIN) $(SRC1_BONUS) $(CFLAGS) $(INCLUDE) $(LIBS) -o server_bonus
+	@echo "$(Bright_Green)$@ compiled successfully.$(Reset)"
+	@$(CC_LIN) $(SRC2_BONUS) $(CFLAGS) $(INCLUDE) $(LIBS) -o client_bonus
+	@echo "$(Bright_Green)$@ compiled successfully.$(Reset)"
+
+##
+
+# Object Compilation
+
+##				LIN
 $(DIR_OBJ1)/%.o: $(DIR_SRC1)/%.c
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIBS) -c $< -o $@
 $(DIR_OBJ2)/%.o: $(DIR_SRC2)/%.c
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) -c $< -o $@
-$(DIR_OBJ3)/%.o: $(DIR_SRC3)/%.c
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) -c $< -o $@
-
-WIN_32_LIB:$(OBJ1_WIN_32) $(OBJ2_WIN_32) $(OBJ3_WIN_32)
-	$(AR) $@ $^
-WIN_32_COMP: $(OBJ1_WIN_32) $(OBJ2_WIN_32) $(OBJ3_WIN_32)
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIB) $^ -o $@
-$(DIR_OBJ1)/win32_%.o: $(DIR_SRC1)/%.c
-	$(CC_WIN_32) $(CFLAGS) $(INCLUDE) -c $< -o $@
-$(DIR_OBJ2)/win32_%.o: $(DIR_SRC2)/%.c
-	$(CC_WIN_32) $(CFLAGS) $(INCLUDE) -c $< -o $@
-$(DIR_OBJ3)/win32_%.o: $(DIR_SRC3)/%.c
-	$(CC_WIN_32) $(CFLAGS) $(INCLUDE) -c $< -o $@
-
-WIN_64_LIB:$(OBJ1_WIN_64) $(OBJ2_WIN_64) $(OBJ3_WIN_64)
-	$(AR) $@ $^
-WIN_64_COMP: $(OBJ1_WIN_64) $(OBJ2_WIN_64) $(OBJ3_WIN_64)
-	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIB) $^ -o $@
-$(DIR_OBJ1)/win64_%.o: $(DIR_SRC1)/%.c
-	$(CC_WIN_64) $(CFLAGS) $(INCLUDE) -c $< -o $@
-$(DIR_OBJ2)/win64_%.o: $(DIR_SRC2)/%.c
-	$(CC_WIN_64) $(CFLAGS) $(INCLUDE) -c $< -o $@
-$(DIR_OBJ3)/win64_%.o: $(DIR_SRC3)/%.c
-	$(CC_WIN_64) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	$(CC_LIN) $(CFLAGS) $(INCLUDE) $(LIBS) -c $< -o $@
+##
 
 clean:
-	rm -f $(OBJ1_LIN) $(OBJ2_LIN) $(OBJ3_LIN) \
-		$(OBJ1_WIN_32) $(OBJ2_WIN_32) $(OBJ3_WIN_32) \
-		$(OBJ1_WIN_64) $(OBJ2_WIN_64) $(OBJ3_WIN_64)
+	@make fclean -C $(LIBS_DIR) > /dev/null 2>&1
+	@echo "$(Bright_Red)libft removed!$(Reset)"
+	@rm -f *.o
+	@echo "$(Bright_Red)Object files removed$(Reset)"
+
 
 fclean:	clean
-	rm -f LIN_COMP WIN_32_COMP WIN_64_COMP LIN_LIB WIN_32_LIB WIN_64_LIB
+	@rm -f $(NAME)
+	@rm -f $(NAME_BONUS)
+	@echo "$(Bright_Red)push_swap removed!$(Reset)"
+	@echo "$(Bright_Green)All removed successfully$(Reset)"
+
+re: fclean all
+
+bonus_re: fclean bonus
 
 teste:
 	@echo "$(Black)Black$(Reset)"
@@ -202,3 +173,5 @@ teste:
 	@echo "$(Framed)Framed$(Reset)"
 	@echo "$(Encircled)Encircled$(Reset)"
 	@echo "$(Overlined)Overlined$(Reset)"
+
+.phony: all bonus fclean clean re bonus_re
