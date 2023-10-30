@@ -6,7 +6,7 @@
 #    By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/18 08:42:34 by ade-pinh          #+#    #+#              #
-#    Updated: 2023/10/29 01:31:14 by ade-pinh         ###   ########.fr        #
+#    Updated: 2023/10/30 19:38:43 by ade-pinh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,9 @@ LIBS_DIR		= libft
 
 ### ---------- FILES ---------- ###
 
-SRC			= main.c push_swap_check_args.c push_swap_cost_utils.c push_swap_cost.c push_swap_sort.c push_swap_utils.c push_swap_utils2.c push_swap.c
+SRC			=	push_swap_check_args2.c push_swap_rotate.c push_swap_sort.c push_swap_swap.c\
+				main.c push_swap.c push_swap_check_args.c push_swap_push.c push_swap_rotate_reverse.c\
+				push_swap_stack_utils.c push_swap_utils.c
 #SRC_BONUS	= server_bonus.c
 
 #OBJ1_LIN = $(patsubst $(DIR_SRC1)/%.c, $(DIR_OBJ1)/%.o, $(SRC1))

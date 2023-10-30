@@ -6,7 +6,7 @@
 /*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 20:13:59 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/10/29 20:25:28 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:52:59 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ static void	push(t_push_swap **stack_src, t_push_swap **stack_dest)
 	(*stack_dest)->next = temp;
 }
 
-void	pa(t_push_swap *stack_a, t_push_swap *stack_b)
+void	pa(t_push_swap **stack_a, t_push_swap **stack_b)
 {
-	push(&stack_a, &stack_b);
+	push(stack_b, stack_a);
 	write(1, "pa\n", 3);
 }
 
-void	pb(t_push_swap *stack_b, t_push_swap *stack_a)
+void	pb(t_push_swap **stack_a, t_push_swap **stack_b)
 {
-	push(&stack_b, &stack_a);
+	push(stack_a, stack_b);
 	write(1, "pb\n", 3);
 }

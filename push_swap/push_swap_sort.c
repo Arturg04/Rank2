@@ -6,7 +6,7 @@
 /*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 00:39:47 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/10/29 16:20:16 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:57:27 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,26 @@ void	sort_3(t_push_swap *stack)
 		j = stack->next->value;
 		k = stack->next->next->value;
 		if (k < i && i < j)
-			rotate_reverse(stack, 'a');
+			rra(stack);
 		else if ((j < k && k < i) || (i > j && j  > k))
-			rotate(stack, 'a');
+			ra(stack);
 		else if ((j < i && i < k) || (k < i && i < j) || (i < k && k < j))
-			swap(stack, 'a');
+			sa(stack);
 	}
 }
 
-void	sort(t_push_swap *stack_a, t_push_swap *stack_b, int total)
+void	sort_5(t_push_swap *stack_a, t_push_swap *stack_b)
 {
-	divide_in_stacks(&stack_a, &stack_b, total / 2);
-}
-
-void	divide_in_stacks(t_push_swap **stack_a, t_push_swap **stack_b, int size)
-{
-
+	pb(&stack_a, &stack_b);
+	pb(&stack_a, &stack_b);
+	sort_3(stack_a);
+	while (!check_solution(stack_a, stack_b))
+	{
+		if (stack_max(stack_a) < stack_b->value)
+			rra(stack_a);
+		else if (stack_a->value > stack_b->value)
+			pa(&stack_a, &stack_b);
+		else
+			ra(stack_a);
+	}
 }

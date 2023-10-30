@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_utils3.c                                 :+:      :+:    :+:   */
+/*   push_swap_stack_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:24:45 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/10/29 20:11:29 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:42:33 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	stack_length(t_push_swap *stack)
 	count = 0;
 	if (!stack)
 		return (0);
-	return (++count + ft_lstsize(stack->next));
+	return (++count + stack_length(stack->next));
 }
 
 int	stack_min(t_push_swap *stack)
