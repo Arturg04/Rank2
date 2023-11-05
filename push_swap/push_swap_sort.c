@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 00:39:47 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/11/05 04:36:21 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/05 13:15:06 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,12 @@ void	sort(t_swap **stack_a, t_swap **stack_b)
 
 	pb(stack_a, stack_b);
 	pb(stack_a, stack_b);
-	while (stack_length(*stack_a) > 0)
+	while (*stack_a)
 	{
-	//	print_stacks(*stack_a, *stack_b);
+		//print_stacks(*stack_a, *stack_b);
 		get_cost(*stack_a, *stack_b);
 		send_object(stack_a, stack_b, least_cost(*stack_a));
+		pb(stack_a, stack_b);
 	}
 	while (*stack_b)
 		pa(stack_a, stack_b);

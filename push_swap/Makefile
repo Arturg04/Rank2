@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+         #
+#    By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/18 08:42:34 by ade-pinh          #+#    #+#              #
-#    Updated: 2023/11/04 19:00:40 by ade-pinh         ###   ########.fr        #
+#    Updated: 2023/11/05 13:05:32 by ade-pinh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ AR				= ar rsc
 
 ### ---------- OTHERS ---------- ###
 NAME			= push_swap
-CFLAGS			= -Werror -Wextra -Wall -g -fsanitize=address
+CFLAGS			= -Werror -Wextra -Wall -g # -fsanitize=address
 INCLUDE			=
 LIBS			= libft/libft.a
 LIBS_DIR		= libft

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_exec.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:00:24 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/11/05 04:23:26 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/05 13:14:59 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,7 @@ void	send_object(t_swap **stack_a, t_swap **stack_b, int value)
 {
 	int	index_a;
 	int	index_b;
-	int	length_a;
-	int	length_b;
 
-	length_a = stack_length(*stack_a);
-	length_b = stack_length(*stack_b);
 	index_a = stack_index(*stack_a, value);
 	if (value > stack_max(*stack_b))
 		index_b = stack_index(*stack_b, stack_max(*stack_b));
@@ -94,5 +90,4 @@ void	send_object(t_swap **stack_a, t_swap **stack_b, int value)
 	else
 		index_b = stack_index(*stack_b, stack_next(*stack_b, value));
 	execute(stack_a, stack_b, index_a, index_b);
-	pb(stack_a, stack_b);
 }
