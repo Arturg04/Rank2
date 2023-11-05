@@ -6,42 +6,90 @@
 /*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:24:45 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/10/30 19:42:33 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/05 03:49:12 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	stack_length(t_push_swap *stack)
+int	stack_length(t_swap *stack)
 {
 	int	count;
 
 	count = 0;
-	if (!stack)
-		return (0);
-	return (++count + stack_length(stack->next));
+	while (stack)
+	{
+		count++;
+		stack = stack->next;
+	}
+	return (count);
 }
 
-int	stack_min(t_push_swap *stack)
+int	stack_min(t_swap *stack)
 {
-	int min;
+	int	min;
 
+	min = stack->value;
 	if (!stack)
 		return (0);
-	min = stack_min(stack->next);
-	if (min > stack->value)
-		return (stack->value);
+	while (stack)
+	{
+		if (min > stack->value)
+			min = stack->value;
+		stack = stack->next;
+	}
 	return (min);
 }
 
-int	stack_max(t_push_swap *stack)
+int	stack_max(t_swap *stack)
 {
-	int max;
+	int	max;
 
+	max = stack->value;
 	if (!stack)
 		return (0);
-	max = stack_max(stack->next);
-	if (max < stack->value)
-		return (stack->value);
+	while (stack)
+	{
+		if (max < stack->value)
+			max = stack->value;
+		stack = stack->next;
+	}
 	return (max);
+}
+
+int	stack_index(t_swap *stack, int value)
+{
+	int		index;
+
+	index = 0;
+	if (!stack)
+		return (0);
+	while (stack)
+	{
+		if (stack->value == value)
+			break ;
+		stack = stack->next;
+		index++;
+	}
+	return (index);
+}
+
+int	stack_next(t_swap *stack, int value)
+{
+	int	next;
+
+	next = 0;
+	if (!stack)
+		return (0);
+	if (value > stack_max(stack))
+		return(stack_max(stack));
+	while (stack)
+	{
+		if (!stack)
+			break ;
+		if ((next < stack->value && stack->value <= value) || (stack->value >= value && next > stack->value))
+			next = stack->value;
+		stack = stack->next;
+	}
+	return (next);
 }

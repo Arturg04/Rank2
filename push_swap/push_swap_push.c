@@ -6,15 +6,15 @@
 /*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 20:13:59 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/10/30 19:52:59 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/04 18:33:26 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	push(t_push_swap **stack_src, t_push_swap **stack_dest)
+static void	push(t_swap **stack_src, t_swap **stack_dest)
 {
-	t_push_swap	*temp;
+	t_swap	*temp;
 
 	temp = *stack_dest;
 	(*stack_dest) = (*stack_src);
@@ -22,13 +22,13 @@ static void	push(t_push_swap **stack_src, t_push_swap **stack_dest)
 	(*stack_dest)->next = temp;
 }
 
-void	pa(t_push_swap **stack_a, t_push_swap **stack_b)
+void	pa(t_swap **stack_a, t_swap **stack_b)
 {
 	push(stack_b, stack_a);
 	write(1, "pa\n", 3);
 }
 
-void	pb(t_push_swap **stack_a, t_push_swap **stack_b)
+void	pb(t_swap **stack_a, t_swap **stack_b)
 {
 	push(stack_a, stack_b);
 	write(1, "pb\n", 3);

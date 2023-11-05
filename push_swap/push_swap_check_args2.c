@@ -6,7 +6,7 @@
 /*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:39:03 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/10/29 22:14:15 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/04 21:49:16 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static int	check_num(char *num)
 	return (1);
 }
 
-static void	check_repeat(t_push_swap *stack)
+static void	check_repeat(t_swap *stack)
 {
-	t_push_swap		*temp;
-	t_push_swap		*check;
+	t_swap		*temp;
+	t_swap		*check;
 
 	check = stack;
 	while (check->next)
@@ -41,12 +41,25 @@ static void	check_repeat(t_push_swap *stack)
 	}
 }
 
-void	check_parameter(char *str, t_push_swap *stack)
+void	remove(t_swap *stack, char **split)
+{
+	int	i;
+
+	i = -1;
+	while (stack->next->next)
+		stack = stack->next;
+	free(stack->next);
+	stack->next = NULL;
+	while (split[++i])
+		free(split[i]);
+	free(split);
+}
+void	check_parameter(char *str, t_swap *stack)
 {
 	int				i;
 	long long int	j;
 	char			**split;
-	t_push_swap		*temp;
+	t_swap			*temp;
 
 	i = -1;
 	split = ft_split(str, ' ');
@@ -59,11 +72,13 @@ void	check_parameter(char *str, t_push_swap *stack)
 		if (j < FT_INT_MIN || j > FT_INT_MAX)
 			call_error(stack);
 		temp->value = j;
-		temp->next = malloc(sizeof(t_push_swap));
+		temp->cost = 0;
+		temp->next = malloc(sizeof(t_swap));
 		if (!temp->next)
 			call_error(stack);
 		temp = temp->next;
 		temp->next = NULL;
 	}
+	remove(stack, split);
 	check_repeat(stack);
 }

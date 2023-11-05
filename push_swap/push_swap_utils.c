@@ -6,19 +6,20 @@
 /*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 20:23:44 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/10/30 19:21:54 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/04 18:56:15 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	call_error(t_push_swap *stack)
+void	call_error(t_swap *stack)
 {
 	free_stack(stack);
 	write(1, "Error\n", 6);
 	exit(0);
 }
-void	free_stack(t_push_swap *stack)
+
+void	free_stack(t_swap *stack)
 {
 	if (!stack)
 		return ;
@@ -28,7 +29,7 @@ void	free_stack(t_push_swap *stack)
 		free(stack);
 }
 
-void	print_stacks(t_push_swap *stack_a, t_push_swap *stack_b)
+void	print_stacks(t_swap *stack_a, t_swap *stack_b)
 {
 	while (stack_a || stack_b)
 	{

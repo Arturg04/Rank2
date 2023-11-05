@@ -6,13 +6,13 @@
 /*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 20:23:20 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/10/29 20:23:32 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/04 18:56:14 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void swap(t_push_swap *stack)
+static void	swap(t_swap *stack)
 {
 	int	temp;
 
@@ -23,19 +23,19 @@ static void swap(t_push_swap *stack)
 	stack->value = temp;
 }
 
-void	sa(t_push_swap *stack)
+void	sa(t_swap *stack)
 {
 	swap(stack);
 	write(1, "sa\n", 3);
 }
 
-void	sb(t_push_swap *stack)
+void	sb(t_swap *stack)
 {
 	swap(stack);
 	write(1, "sa\n", 3);
 }
 
-void	ss(t_push_swap *stack_a, t_push_swap *stack_b)
+void	ss(t_swap *stack_a, t_swap *stack_b)
 {
 	sa(stack_a);
 	sb(stack_b);

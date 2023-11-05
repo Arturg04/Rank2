@@ -6,7 +6,7 @@
 #    By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/18 08:42:34 by ade-pinh          #+#    #+#              #
-#    Updated: 2023/10/30 19:38:43 by ade-pinh         ###   ########.fr        #
+#    Updated: 2023/11/04 19:00:40 by ade-pinh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,6 @@ AR				= ar rsc
 
 ### ---------- OTHERS ---------- ###
 NAME			= push_swap
-NAME_BONUS		= server_bonus client_bonus
 CFLAGS			= -Werror -Wextra -Wall -g -fsanitize=address
 INCLUDE			=
 LIBS			= libft/libft.a
@@ -77,9 +76,8 @@ LIBS_DIR		= libft
 
 ### ---------- FILES ---------- ###
 
-SRC			=	push_swap_check_args2.c push_swap_rotate.c push_swap_sort.c push_swap_swap.c\
-				main.c push_swap.c push_swap_check_args.c push_swap_push.c push_swap_rotate_reverse.c\
-				push_swap_stack_utils.c push_swap_utils.c
+SRC			=	push_swap.c push_swap_stack_utils.c push_swap_check_args2.c push_swap_push.c push_swap_swap.c push_swap_check_args.c push_swap_rotate.c push_swap_utils.c push_swap_cost.c push_swap_rotate_reverse.c push_swap_exec.c push_swap_sort.c
+
 #SRC_BONUS	= server_bonus.c
 
 #OBJ1_LIN = $(patsubst $(DIR_SRC1)/%.c, $(DIR_OBJ1)/%.o, $(SRC1))
@@ -101,14 +99,6 @@ $(LIBS):
 
 $(NAME):
 	@$(CC_LIN) $(SRC) $(CFLAGS) $(INCLUDE) $(LIBS) -o $@
-	@echo "$(Bright_Green)$@ compiled successfully.$(Reset)"
-
-bonus: $(LIBS) $(NAME_BONUS)
-
-$(NAME_BONUS):
-	@$(CC_LIN) $(SRC1_BONUS) $(CFLAGS) $(INCLUDE) $(LIBS) -o server_bonus
-	@echo "$(Bright_Green)$@ compiled successfully.$(Reset)"
-	@$(CC_LIN) $(SRC2_BONUS) $(CFLAGS) $(INCLUDE) $(LIBS) -o client_bonus
 	@echo "$(Bright_Green)$@ compiled successfully.$(Reset)"
 
 ##
