@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 20:12:29 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/11/05 01:57:56 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/05 21:27:04 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 typedef struct s_swap
 {
 	int				value;
-	int				cost;
 	struct s_swap	*next;
 }	t_swap;
 
@@ -34,14 +33,13 @@ int		stack_length(t_swap *stack);
 int		stack_min(t_swap *stack);
 int		stack_max(t_swap *stack);
 int		stack_index(t_swap *stack, int value);
-int		stack_next(t_swap *stack, int value);
 
 // Commands
 void	sa(t_swap *stack);
 void	sb(t_swap *stack);
 void	ss(t_swap *stack_a, t_swap *stack_b);
 void	pa(t_swap **stack_a, t_swap **stack_b);
-void	pb(t_swap **stack_b, t_swap **stack_a);
+void	pb(t_swap **stack_a, t_swap **stack_b);
 void	ra(t_swap *stack_a);
 void	rb(t_swap *stack_b);
 void	rr(t_swap *stack_a, t_swap *stack_b);
@@ -52,21 +50,31 @@ void	rrr(t_swap *stack_a, t_swap *stack_b);
 // Check
 void	check_params(int ac, char	**av, t_swap *stack);
 void	check_parameter(char *str, t_swap *stack);
-int		check_order(t_swap *stack);
-int		check_solution(t_swap *stack_a, t_swap *stack_b);
 
 // Sort
 void	sort_3(t_swap **stack);
-void	sort_5(t_swap **stack_a, t_swap **stack_b);
-void	sort(t_swap **stack_a, t_swap **stack_b);
+void	sort(t_swap **stack_a);
 
-void	send_object(t_swap **stack_a, t_swap **stack_b, int value);
+void	push_swap(t_swap *stack_a);
 
-// Cost
-void	get_cost(t_swap *stack_a, t_swap *stack_b);
-int		least_cost(t_swap *stack);
-int		cost_rotate(int length, int index);
+t_swap	*stack_last(t_swap *stack);
+int		check_sorted(t_swap *stack);
+int		rotate_type_ab(t_swap *a, t_swap *b);
+int		rotate_type_ba(t_swap *a, t_swap *b);
+int		find_place_a(t_swap *stack_b, int value_push);
+int		find_place_b(t_swap *stack_b, int value_push);
+int		apply_rarrb(t_swap **a, t_swap **b, int c, char s);
+int		apply_rrarb(t_swap **a, t_swap **b, int c, char s);
+int		apply_rrarrb(t_swap **a, t_swap **b, int c, char s);
+int		apply_rarb(t_swap **a, t_swap **b, int c, char s);
+int		case_rarb(t_swap *a, t_swap *b, int c);
+int		case_rrarrb(t_swap *a, t_swap *b, int c);
+int		case_rrarb(t_swap *a, t_swap *b, int c);
+int		case_rarrb(t_swap *a, t_swap *b, int c);
+int		case_rarb_a(t_swap *a, t_swap *b, int c);
+int		case_rrarrb_a(t_swap *a, t_swap *b, int c);
+int		case_rarrb_a(t_swap *a, t_swap *b, int c);
+int		case_rrarb_a(t_swap *a, t_swap *b, int c);
 
-void	push_swap(t_swap *stack_a, t_swap *stack_b);
 
 #endif

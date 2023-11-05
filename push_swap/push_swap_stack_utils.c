@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_stack_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:24:45 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/11/05 03:49:12 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/05 21:28:02 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int	stack_min(t_swap *stack)
 	int	min;
 
 	min = stack->value;
-	if (!stack)
-		return (0);
 	while (stack)
 	{
 		if (min > stack->value)
@@ -46,8 +44,6 @@ int	stack_max(t_swap *stack)
 	int	max;
 
 	max = stack->value;
-	if (!stack)
-		return (0);
 	while (stack)
 	{
 		if (max < stack->value)
@@ -62,8 +58,6 @@ int	stack_index(t_swap *stack, int value)
 	int		index;
 
 	index = 0;
-	if (!stack)
-		return (0);
 	while (stack)
 	{
 		if (stack->value == value)
@@ -74,22 +68,9 @@ int	stack_index(t_swap *stack, int value)
 	return (index);
 }
 
-int	stack_next(t_swap *stack, int value)
+t_swap	*stack_last(t_swap *stack)
 {
-	int	next;
-
-	next = 0;
-	if (!stack)
-		return (0);
-	if (value > stack_max(stack))
-		return(stack_max(stack));
-	while (stack)
-	{
-		if (!stack)
-			break ;
-		if ((next < stack->value && stack->value <= value) || (stack->value >= value && next > stack->value))
-			next = stack->value;
-		stack = stack->next;
-	}
-	return (next);
+	if (!stack || !stack->next)
+		return (stack);
+	return (stack_last(stack->next));
 }

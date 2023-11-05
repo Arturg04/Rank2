@@ -6,7 +6,7 @@
 #    By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/18 08:42:34 by ade-pinh          #+#    #+#              #
-#    Updated: 2023/11/05 13:05:32 by ade-pinh         ###   ########.fr        #
+#    Updated: 2023/11/05 21:24:28 by ade-pinh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,10 @@ LIBS_DIR		= libft
 
 ### ---------- FILES ---------- ###
 
-SRC			=	push_swap.c push_swap_stack_utils.c push_swap_check_args2.c push_swap_push.c push_swap_swap.c push_swap_check_args.c push_swap_rotate.c push_swap_utils.c push_swap_cost.c push_swap_rotate_reverse.c push_swap_exec.c push_swap_sort.c
+SRC			=	push_swap.c push_swap_rotate.c push_swap_rotate_type.c push_swap_stack_utils.c\
+				push_swap_check_args2.c push_swap_cost_utils_ab.c push_swap_rotate_push.c push_swap_sort.c push_swap_swap.c\
+				push_swap_check_args.c push_swap_cost_utils_ba.c push_swap_push.c push_swap_rotate_reverse.c push_swap_stack_utils_2.c push_swap_utils.c\
+
 
 #SRC_BONUS	= server_bonus.c
 

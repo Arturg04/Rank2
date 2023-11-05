@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_check_args2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:39:03 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/11/04 21:49:16 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/05 21:29:56 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	remove(t_swap *stack, char **split)
 		free(split[i]);
 	free(split);
 }
+
 void	check_parameter(char *str, t_swap *stack)
 {
 	int				i;
@@ -72,7 +73,6 @@ void	check_parameter(char *str, t_swap *stack)
 		if (j < FT_INT_MIN || j > FT_INT_MAX)
 			call_error(stack);
 		temp->value = j;
-		temp->cost = 0;
 		temp->next = malloc(sizeof(t_swap));
 		if (!temp->next)
 			call_error(stack);

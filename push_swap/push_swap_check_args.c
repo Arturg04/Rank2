@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_check_args.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:39:03 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/11/04 18:49:31 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/05 21:29:31 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	check_params(int ac, char	**av, t_swap *stack)
 		if (j < FT_INT_MIN || j > FT_INT_MAX)
 			call_error(stack);
 		temp->value = j;
-		temp->cost = 0;
 		if (!(i + 1 < ac))
 			break ;
 		temp->next = malloc(sizeof(t_swap));
@@ -69,40 +68,17 @@ void	check_params(int ac, char	**av, t_swap *stack)
 	check_repeat(stack);
 }
 
-int	check_solution(t_swap *stack_a, t_swap *stack_b)
+int	check_sorted(t_swap *stack)
 {
-	if (stack_b || !stack_a)
-		return (0);
-	while (stack_a->next && stack_a)
+	int	i;
+
+	i = stack->value;
+	while (stack)
 	{
-		if (stack_a->next->value < stack_a->value)
+		if (i > stack->value)
 			return (0);
-		stack_a = stack_a->next;
+		i = stack->value;
+		stack = stack->next;
 	}
 	return (1);
-}
-
-int	check_order(t_swap *stack)
-{
-	int	temp;
-
-	temp = stack->value;
-	while (stack->next && stack)
-	{
-		if (stack->next->value < stack->value)
-			break ;
-		stack = stack->next;
-	}
-	stack = stack->next;
-	if (!stack)
-		return (1);
-	while (stack->next && stack)
-	{
-		if (stack->next->value < stack->value)
-			break ;
-		stack = stack->next;
-	}
-	if (stack->value < temp && !stack->next)
-		return (1);
-	return (0);
 }
