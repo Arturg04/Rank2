@@ -6,7 +6,7 @@
 /*   By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:39:03 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/11/05 21:29:31 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/06 21:03:23 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static void	check_repeat(t_swap *stack)
 	t_swap		*check;
 
 	check = stack;
-	while (check->next)
+	while (check)
 	{
 		temp = check->next;
-		while (temp->next)
+		while (temp)
 		{
 			if (check->value == temp->value)
 				call_error(stack);

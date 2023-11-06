@@ -6,7 +6,7 @@
 /*   By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 22:28:07 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/11/05 21:54:19 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/06 21:09:55 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	push_swap(t_swap *stack_a)
 	length = stack_length(stack_a);
 	while (!check_sorted(stack_a))
 	{
-		if (length <= 3)
+		if (length == 2)
+			sa(stack_a);
+		else if (length == 3)
 			sort_3(&stack_a);
 		else
 			sort(&stack_a);
