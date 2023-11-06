@@ -6,7 +6,7 @@
 /*   By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 20:12:29 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/11/06 08:46:06 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/06 22:42:09 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,25 +55,24 @@ int		check_sorted(t_swap *stack);
 // Sort
 void	sort_3(t_swap **stack);
 void	sort(t_swap **stack_a);
-
 void	push_swap(t_swap *stack_a);
-
 int		rotate_type_ab(t_swap *a, t_swap *b);
 int		rotate_type_ba(t_swap *a, t_swap *b);
 int		next_a(t_swap *stack_b, int value_push);
 int		next_b(t_swap *stack_b, int value_push);
-int		apply_rarrb(t_swap **a, t_swap **b, int c, char s);
-int		apply_rrarb(t_swap **a, t_swap **b, int c, char s);
-int		apply_rrarrb(t_swap **a, t_swap **b, int c, char s);
-int		apply_rarb(t_swap **a, t_swap **b, int c, char s);
-int		case_rarb(t_swap *a, t_swap *b, int c);
-int		case_rrarrb(t_swap *a, t_swap *b, int c);
-int		case_rrarb(t_swap *a, t_swap *b, int c);
-int		case_rarrb(t_swap *a, t_swap *b, int c);
-int		case_rarb_a(t_swap *a, t_swap *b, int c);
-int		case_rrarrb_a(t_swap *a, t_swap *b, int c);
-int		case_rarrb_a(t_swap *a, t_swap *b, int c);
-int		case_rrarb_a(t_swap *a, t_swap *b, int c);
 
+//Count and Apply
+int		rarrb(t_swap **a, t_swap **b, int c, char s);
+int		rrarb(t_swap **a, t_swap **b, int c, char s);
+int		rrarrb(t_swap **a, t_swap **b, int c, char s);
+int		rarb(t_swap **a, t_swap **b, int c, char s);
+int		count_rarb(t_swap *a, t_swap *b, int c);
+int		count_rrarrb(t_swap *a, t_swap *b, int c);
+int		count_rrarb(t_swap *a, t_swap *b, int c);
+int		count_rarrb(t_swap *a, t_swap *b, int c);
+int		count_rarb_a(t_swap *a, t_swap *b, int c);
+int		count_rrarrb_a(t_swap *a, t_swap *b, int c);
+int		count_rarrb_a(t_swap *a, t_swap *b, int c);
+int		count_rrarb_a(t_swap *a, t_swap *b, int c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 00:39:47 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/11/05 21:16:25 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/06 22:40:48 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ void	sort_until_3(t_swap **stack_a, t_swap **stack_b)
 		i = rotate_type_ab(*stack_a, *stack_b);
 		while (i >= 0)
 		{
-			if (i == case_rarb(*stack_a, *stack_b, tmp->value))
-				i = apply_rarb(stack_a, stack_b, tmp->value, 'a');
-			else if (i == case_rrarrb(*stack_a, *stack_b, tmp->value))
-				i = apply_rrarrb(stack_a, stack_b, tmp->value, 'a');
-			else if (i == case_rarrb(*stack_a, *stack_b, tmp->value))
-				i = apply_rarrb(stack_a, stack_b, tmp->value, 'a');
-			else if (i == case_rrarb(*stack_a, *stack_b, tmp->value))
-				i = apply_rrarb(stack_a, stack_b, tmp->value, 'a');
+			if (i == count_rarb(*stack_a, *stack_b, tmp->value))
+				i = rarb(stack_a, stack_b, tmp->value, 'a');
+			else if (i == count_rrarrb(*stack_a, *stack_b, tmp->value))
+				i = rrarrb(stack_a, stack_b, tmp->value, 'a');
+			else if (i == count_rarrb(*stack_a, *stack_b, tmp->value))
+				i = rarrb(stack_a, stack_b, tmp->value, 'a');
+			else if (i == count_rrarb(*stack_a, *stack_b, tmp->value))
+				i = rrarb(stack_a, stack_b, tmp->value, 'a');
 			else
 				tmp = tmp->next;
 		}
@@ -87,14 +87,14 @@ t_swap	**sort_a(t_swap **stack_a, t_swap **stack_b)
 		i = rotate_type_ba(*stack_a, *stack_b);
 		while (i >= 0)
 		{
-			if (i == case_rarb_a(*stack_a, *stack_b, tmp->value))
-				i = apply_rarb(stack_a, stack_b, tmp->value, 'b');
-			else if (i == case_rarrb_a(*stack_a, *stack_b, tmp->value))
-				i = apply_rarrb(stack_a, stack_b, tmp->value, 'b');
-			else if (i == case_rrarrb_a(*stack_a, *stack_b, tmp->value))
-				i = apply_rrarrb(stack_a, stack_b, tmp->value, 'b');
-			else if (i == case_rrarb_a(*stack_a, *stack_b, tmp->value))
-				i = apply_rrarb(stack_a, stack_b, tmp->value, 'b');
+			if (i == count_rarb_a(*stack_a, *stack_b, tmp->value))
+				i = rarb(stack_a, stack_b, tmp->value, 'b');
+			else if (i == count_rarrb_a(*stack_a, *stack_b, tmp->value))
+				i = rarrb(stack_a, stack_b, tmp->value, 'b');
+			else if (i == count_rrarrb_a(*stack_a, *stack_b, tmp->value))
+				i = rrarrb(stack_a, stack_b, tmp->value, 'b');
+			else if (i == count_rrarb_a(*stack_a, *stack_b, tmp->value))
+				i = rrarb(stack_a, stack_b, tmp->value, 'b');
 			else
 				tmp = tmp->next;
 		}
