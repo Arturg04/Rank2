@@ -6,13 +6,13 @@
 /*   By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:24:45 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/11/05 20:59:27 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/05 21:59:19 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	find_place_b(t_swap *stack_b, int value)
+int	next_b(t_swap *stack_b, int value)
 {
 	int		i;
 	t_swap	*tmp;
@@ -35,7 +35,7 @@ int	find_place_b(t_swap *stack_b, int value)
 	return (i);
 }
 
-int	find_place_a(t_swap *stack_a, int value)
+int	next_a(t_swap *stack_a, int value)
 {
 	int		i;
 	t_swap	*tmp;

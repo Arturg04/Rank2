@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 20:23:44 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/11/04 18:56:15 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/05 21:55:11 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,4 @@ void	free_stack(t_swap *stack)
 		free_stack(stack->next);
 	if (stack)
 		free(stack);
-}
-
-void	print_stacks(t_swap *stack_a, t_swap *stack_b)
-{
-	while (stack_a || stack_b)
-	{
-		if (stack_a)
-		{
-			ft_putnbr_fd(stack_a->value, 1);
-			stack_a = stack_a->next;
-		}
-		else
-			write(1, "     ", 5);
-		write(1, "|", 1);
-		if (stack_b)
-		{
-			ft_putnbr_fd(stack_b->value, 1);
-			stack_b = stack_b->next;
-		}
-		else
-			write(1, "     ", 5);
-		write(1, "\n", 1);
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 22:28:07 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/11/05 21:31:29 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/05 21:54:19 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	push_swap(t_swap *stack_a)
 		else
 			sort(&stack_a);
 	}
-	print_stacks(stack_a, NULL);
 }
 
 int	main(int ac, char **av)
