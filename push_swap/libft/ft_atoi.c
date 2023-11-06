@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:05:45 by Arturg04          #+#    #+#             */
-/*   Updated: 2023/10/28 15:50:06 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/06 22:00:22 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,10 @@ long long int	ft_atoi(const char *nptr)
 	}
 	while (ft_isdigit(*nptr))
 	{
-		if (res > (FT_INT_MAX_PLUS / 10)
-			|| (res == FT_INT_MAX_PLUS / 10 && *nptr > '7'))
-		{
-			if (neg > 0)
-				return (FT_INT_MAX_PLUS);
+		if (res > FT_INT_MAX)
+			return (FT_INT_MAX_PLUS);
+		if (res < FT_INT_MIN)
 			return (FT_INT_MIN_PLUS);
-		}
 		res = res * 10 + *(nptr++) - '0';
 	}
 	return (res * neg);
