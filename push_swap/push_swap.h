@@ -6,7 +6,7 @@
 /*   By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 20:12:29 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/11/06 22:42:09 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/07 08:30:57 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,9 @@ int		count_rarb_a(t_swap *a, t_swap *b, int c);
 int		count_rrarrb_a(t_swap *a, t_swap *b, int c);
 int		count_rarrb_a(t_swap *a, t_swap *b, int c);
 int		count_rrarb_a(t_swap *a, t_swap *b, int c);
+
+//test
+int	get_cost(t_swap *src, t_swap *dst, int i, int (*n)(t_swap *d, int i));
+int	cost(t_swap *stack, int i);
 
 #endif

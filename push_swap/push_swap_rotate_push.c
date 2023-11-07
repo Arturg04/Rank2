@@ -6,7 +6,7 @@
 /*   By: ade-pinh <artur.13.goncalves@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 21:05:30 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/11/06 22:39:12 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/07 09:11:08 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,3 +103,21 @@ int	rarrb(t_swap **a, t_swap **b, int c, char s)
 	}
 	return (-1);
 }
+
+// int	exec(t_swap **src, t_swap **dst, int i, int (*n)(t_swap *d, int i))
+// {
+// 	int	cost_s;
+// 	int	cost_d;
+// 	int	dst_val;
+
+// 	dst_val = n(dst, i);
+// 	cost_s = cost(src, i);
+// 	cost_d = cost(dst, dst_val);
+
+// 	while (cost_s > 0 && cost_d > 0 && stack_index(src, i) && stack_index(dst, dst_val))
+// 		rr(*src, *dst);
+// 	while (cost_s < 0 && cost_d < 0 && stack_index(src, i) && stack_index(dst, dst_val))
+// 		rrr(*src, *dst);
+
+
+// }
