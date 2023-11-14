@@ -92,7 +92,6 @@ $(LIBS):
 	@echo "$(Del)$(Bright_Green)libft compiled successfully.$(Reset)"
 	@echo "$(Bright_Green)$(Blink)Compiling minilibx...$(Reset)"
 	@make -C libs/minilibx-linux > /dev/null 2>&1
-	@libs/minilibx-linux/configure
 	@echo "$(Del)"
 	@echo "$(Del)$(Bright_Green)minilibx compiled successfully.$(Reset)"
 

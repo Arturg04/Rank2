@@ -17,7 +17,6 @@ static void	check_name(char	*file, t_so_long *game)
 	char	*ext;
 
 	ext = ft_strchr(file, '.');
-	game->map = NULL;
 	if (!ext)
 		call_error(game);
 	while (ft_strchr(ext + 1, '.'))
@@ -135,4 +134,5 @@ void	parser(char *file, t_so_long *game)
 	if (!game->map)
 		call_error(game);
 	check_map(game);
+	close(fd);
 }

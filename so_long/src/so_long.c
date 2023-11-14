@@ -22,14 +22,10 @@ static void	image(void *mlx, void *win, void *img, int x, int y)
 
 int	render(t_so_long *game)
 {
-	static int	time;
-	int			i;
-	int			j;
+	int	i;
+	int	j;
 
 	i = -1;
-	if (time++ < 100)
-		return (0);
-	time = 0;
 	while (game->map->map[++i] && i < game->map->heigth)
 	{
 		j = -1;
@@ -75,6 +71,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (0);
 	game = malloc(sizeof(t_so_long));
+	game->map = NULL;
 	parser(av[1], game);
 	fludfill_coin(game, game->player_y, game->player_x);
 	if (game->col != game->map->col)
