@@ -51,7 +51,6 @@ void	move_down(t_so_long *game)
 	game->player_x = game->player_x;
 	game->player_y = game->player_y + 1;
 	player_pos(game, game->player_y - 1, game->player_x);
-
 }
 
 void	move_left(t_so_long *game)
@@ -59,7 +58,6 @@ void	move_left(t_so_long *game)
 	game->player_x = game->player_x - 1;
 	game->player_y = game->player_y;
 	player_pos(game, game->player_y, game->player_x + 1);
-
 }
 
 void	move_right(t_so_long *game)

@@ -17,6 +17,9 @@ static void	check_name(char	*file, t_so_long *game)
 	char	*ext;
 
 	ext = ft_strchr(file, '.');
+	game->map = NULL;
+	if (!ext)
+		call_error(game);
 	while (ft_strchr(ext + 1, '.'))
 		ext = ft_strchr(ext + 1, '.');
 	if (ft_strncmp(ext, ".ber", ft_strlen(ext)))

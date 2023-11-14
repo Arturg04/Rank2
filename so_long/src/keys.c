@@ -33,5 +33,3 @@ int	key_press(int keycode, t_so_long *game)
 		move_right(game);
 	return (0);
 }
-
-
