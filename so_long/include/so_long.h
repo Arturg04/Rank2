@@ -22,10 +22,9 @@
 
 typedef struct s_map
 {
-	int 	collectibles;
 	int		width;
 	int		heigth;
-	int 	col;
+	int		col;
 	int		player;
 	int		exit;
 	char	**map;
@@ -39,6 +38,8 @@ typedef struct s_so_long
 	void		**xpm;
 	int			player_x;
 	int			player_y;
+	int			exit_x;
+	int			exit_y;
 	int			col;
 	int			moves;
 }			t_so_long;
@@ -63,11 +64,12 @@ char	*joint_free(char *str1, char *str2);
 
 //---------------Parser
 void	parser(char *file, t_so_long *game);
-int fludfill(t_so_long *game, int i, int j);
+int		fludfill(t_so_long *game, int i, int j);
+void	fludfill_coin(t_so_long *game, int i, int j);
 
 //---------------Keys
 void	set_keys(t_so_long *game);
-int	key_press(int keycode, t_so_long *game);
+int		key_press(int keycode, t_so_long *game);
 
 //---------------Player
 

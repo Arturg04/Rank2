@@ -15,9 +15,10 @@
 void	free_map(t_map *map)
 {
 	int	i;
+
 	if (!map)
 		return ;
-	if(map->map)
+	if (map->map)
 	{
 		i = -1;
 		while (map->map[++i] && map->map[i] != NULL)
@@ -32,7 +33,7 @@ void	free_map(t_map *map)
 		free(map);
 }
 
-void call_error(t_so_long *game)
+void	call_error(t_so_long *game)
 {
 	if (game->map)
 		free_map(game->map);
@@ -42,7 +43,7 @@ void call_error(t_so_long *game)
 	exit(0);
 }
 
-int end_game(t_so_long *game)
+int	end_game(t_so_long *game)
 {
 	int	i;
 
@@ -60,9 +61,9 @@ int end_game(t_so_long *game)
 	return (0);
 }
 
-void print_map(t_map *map)
+void	print_map(t_map *map)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (map->map[++i])

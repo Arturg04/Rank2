@@ -22,21 +22,21 @@ int	render(t_so_long *game)
 	if (time++ < 100)
 		return (0);
 	time = 0;
-	mlx_clear_window(game->mlx, game->win);
-	while (game->map->map[++i])
+	//mlx_clear_window(game->mlx, game->win);
+	while (game->map->map[++i] && i < game->map->heigth)
 	{
 		j = -1;
-		while (game->map->map[i][++j])
+		while (game->map->map[i][++j] && j < game->map->width)
 		{
 			mlx_put_image_to_window(game->mlx, game->win, game->xpm[0], 100 * j, 100 * i);
 			if (game->map->map[i][j] == 'C')
 				mlx_put_image_to_window(game->mlx, game->win, game->xpm[2], 100 * j, 100 * i);
-			else if (game->map->map[i][j] == '1')
+			if (game->map->map[i][j] == '1')
 				mlx_put_image_to_window(game->mlx, game->win, game->xpm[1], 100 * j, 100 * i);
-			else if (game->map->map[i][j] == 'P')
-				mlx_put_image_to_window(game->mlx, game->win, game->xpm[4], 100 * j, 100 * i);
-			else if (game->map->map[i][j] == 'E')
+			if (i == game->exit_y && j == game->exit_x)
 				mlx_put_image_to_window(game->mlx, game->win, game->xpm[3], 100 * j, 100 * i);
+			if (game->map->map[i][j] == 'P')
+				mlx_put_image_to_window(game->mlx, game->win, game->xpm[4], 100 * j, 100 * i);
 		}
 	}
 	return (0);
@@ -63,6 +63,11 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (0);
 	game = malloc(sizeof(t_so_long));
+	parser(av[1], game);
+	fludfill_coin(game, game->player_y, game->player_x);
+	if (game->col != game->map->col)
+		call_error(game);
+	free_map(game->map);
 	parser(av[1], game);
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, 100 * game->map->width, 100 * game->map->heigth, "so_long");
