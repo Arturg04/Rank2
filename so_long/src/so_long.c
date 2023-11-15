@@ -6,7 +6,7 @@
 /*   By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 02:13:20 by ade-pinh          #+#    #+#             */
-/*   Updated: 2023/11/12 16:26:20 by ade-pinh         ###   ########.fr       */
+/*   Updated: 2023/11/15 16:58:51 by ade-pinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	load_all_xpms(t_so_long *game)
 	game->xpm[3] = mlx_xpm_file_to_image(game->mlx,
 			"./assets/gate/gate_0.xpm", &i, &i);
 	game->xpm[4] = mlx_xpm_file_to_image(game->mlx,
-			"./assets/cat/cat_0.xpm", &i, &i);
+			"./assets/cat/cat_53.xpm", &i, &i);
 	game->xpm[5] = NULL;
 }
 
