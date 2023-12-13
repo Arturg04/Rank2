@@ -6,7 +6,7 @@
 #    By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/18 08:42:34 by ade-pinh          #+#    #+#              #
-#    Updated: 2023/11/12 14:33:45 by ade-pinh         ###   ########.fr        #
+#    Updated: 2023/12/13 09:17:34 by ade-pinh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,13 +74,10 @@ MLXFLAGS		= -Imlx_linux
 LIBS_DIR		= libft minilibx-linux
 
 ### ---------- FILES ---------- ###
-MAIN		= src/so_long.c
 SRC			=	src/keys.c src/moves.c src/parser.c \
-				src/utils.c src/parser2.c
-BONUS_MAIN	= src/so_long.c
-BONUS_SRC	=
+				src/utils.c src/parser2.c src/so_long.c
+
 OBJ = ${SRC:.c=.o}
-BONUS_OBJ = ${BONUS_SRC:.c=.o}
 
 ### ---------- FUNCTIONS ---------- ###
 all: $(LIBS) $(NAME)
@@ -99,16 +96,10 @@ $(LIBS):
 	@${CC} -c ${CFLAGS} $(MLXFLAGS) $< -o ${<:.c=.o}
 
 $(NAME): $(OBJ)
-	@$(CC_LIN) $(OBJ) $(MAIN) -L ./libs/minilibx-linux -lmlx -Ilmlx -lXext -lX11 -lbsd $(CFLAGS) -I$(INCLUDE) $(LIBS) -o $@
+	@$(CC_LIN) $(OBJ) -L ./libs/minilibx-linux -lmlx -Ilmlx -lXext -lX11 -lbsd $(CFLAGS) -I$(INCLUDE) $(LIBS) -o $@
 	@echo "$(Bright_Green)$@ compiled successfully.$(Reset)"
 
-
-$(BONUS): $(BONUS_OBJ)
-	@$(CC_LIN) $(BONUS_SRC) $(BONUS_MAIN) $(CFLAGS)  -I$(INCLUDE) $(LIBS) -o $@
-	@echo "$(Bright_Green)$@ compiled successfully.$(Reset)"
 ##
-
-bonus: $(BONUS)
 
 
 clean:

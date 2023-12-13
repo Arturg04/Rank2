@@ -6,7 +6,7 @@
 #    By: ade-pinh <ade-pinh@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/18 08:42:34 by ade-pinh          #+#    #+#              #
-#    Updated: 2023/10/28 15:37:24 by ade-pinh         ###   ########.fr        #
+#    Updated: 2023/12/13 09:20:19 by ade-pinh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,9 +82,6 @@ SRC2			= client.c
 SRC1_BONUS		= server_bonus.c
 SRC2_BONUS		= client_bonus.c
 
-#OBJ1_LIN = $(patsubst $(DIR_SRC1)/%.c, $(DIR_OBJ1)/%.o, $(SRC1))
-#OBJ2_LIN = $(patsubst $(DIR_SRC2)/%.c, $(DIR_OBJ2)/%.o, $(SRC2))
-
 ### ---------- FUNCTIONS ---------- ###
 
 all: $(LIBS) $(NAME)
@@ -94,10 +91,6 @@ $(LIBS):
 	@make bonus -C $(dir $@) > /dev/null 2>&1
 	@echo "$(Del)"
 	@echo "$(Del)$(Bright_Green)$@ compiled successfully.$(Reset)"
-
-##				LIN
-#LIN_LIB:$(OBJ1_LIN) $(OBJ2_LIN)
-#	$(AR) $@ $^
 
 $(NAME):
 	@$(CC_LIN) $(SRC1) $(CFLAGS) $(INCLUDE) $(LIBS) -o server
